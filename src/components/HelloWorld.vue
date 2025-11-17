@@ -1,9 +1,37 @@
 <script setup lang="ts">
-import { PlayCircle } from 'lucide-vue-next'
+import { PlayCircle, Download } from 'lucide-vue-next'
+import { onMounted, ref } from 'vue'
+// Corrección: Importar como un namespace
+import * as anime from 'animejs' 
+
 defineProps<{ 
   msg: string, 
   description: string 
 }>()
+
+const titleRef = ref(null)
+
+onMounted(() => {
+  if (titleRef.value) {
+    const textWrapper = titleRef.value as HTMLElement;
+    textWrapper.innerHTML = textWrapper.textContent!.replace(
+      /\S/g, 
+      "<span class='letter'>$&</span>"
+    );
+
+    // Corrección: Usar 'anime.default' para acceder a la función
+    anime.default.timeline({ loop: false })
+      .add({
+        targets: '.letter',
+        translateY: [60, 0],
+        opacity: [0, 1],
+        filter: ['blur(15px)', 'blur(0px)'],
+        easing: 'easeOutExpo',
+        duration: 1800,
+        delay: anime.default.stagger(100) // Y aquí también
+      });
+  }
+})
 </script>
 
 <template>
@@ -11,13 +39,24 @@ defineProps<{
     <div class="hero-background"></div>
     
     <div class="hero-content" v-motion-fade-in>
-      <h1 class="game-title">{{ msg }}</h1>
+      <h1 class="game-title" ref="titleRef">{{ msg }}</h1>
       <p class="game-description">{{ description }}</p>
       
-      <button class="cta-button">
-        <PlayCircle :size="24" />
-        <span>Ver Tráiler</span>
-      </button>
+      <div class="button-group">
+        <button class="cta-button">
+          <PlayCircle :size="24" />
+          <span>Ver Tráiler</span>
+        </button>
+        
+        <a 
+          href="https://github.com/acelar0523/paginajuegoceja" 
+          target="_blank" 
+          class="cta-button cta-button-secondary"
+        >
+          <Download :size="24" />
+          <span>Descargar Juego</span>
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -25,7 +64,7 @@ defineProps<{
 <style scoped>
 .hero-section {
   position: relative;
-  height: 95vh; /* Casi toda la altura de la pantalla */
+  min-height: 95vh; /* Cambiado de height a min-height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,12 +79,20 @@ defineProps<{
   left: 0;
   width: 100%;
   height: 100%;
-  /* REEMPLAZA ESTA URL con una imagen o GIF de tu juego. 
-    Usamos un placeholder oscuro por ahora.
-  */
-  background: #000 url('https://via.placeholder.com/1920x1080/0a0a0a/111111?text=Fondo+del+Juego') no-repeat center center/cover;
-  filter: brightness(0.3) blur(2px); /* Oscurece y desenfoca el fondo */
+  /* Reemplaza este placeholder por una imagen tuya */
+  background: #000 url('https://www.urgente.bo/sites/default/files/transporte%20de%20noche.jpg') no-repeat center center/cover;
+  filter: brightness(0.3) blur(2px);
   z-index: 1;
+  animation: subtle-zoom 20s infinite alternate ease-in-out;
+}
+
+@keyframes subtle-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
 }
 
 .hero-content {
@@ -55,13 +102,18 @@ defineProps<{
 }
 
 .game-title {
-  /* Fuente de Terror para el título */
   font-family: 'Creepster', cursive; 
-  font-size: clamp(3.5rem, 9vw, 8rem); /* Tamaño responsivo */
+  font-size: clamp(3.5rem, 9vw, 8rem);
   color: var(--color-primary);
   margin: 0;
   line-height: 1.1;
   text-shadow: 0 0 15px rgba(183, 28, 28, 0.7);
+  
+  :deep(.letter) {
+    display: inline-block;
+    line-height: 1em;
+    opacity: 0;
+  }
 }
 
 .game-description {
@@ -70,6 +122,13 @@ defineProps<{
   margin: 1em auto 2.5em;
   color: #ccc;
   font-weight: 400;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .cta-button {
@@ -82,21 +141,34 @@ defineProps<{
   font-weight: 700;
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.7em;
-  /* Animación de pulso */
+  text-decoration: none;
   animation: pulse 2s infinite;
 }
 
 .cta-button:hover {
   background-color: var(--color-primary-hover);
   transform: scale(1.05);
-  animation-play-state: paused; /* Pausa la animación al pasar el mouse */
+  animation-play-state: paused;
 }
 
-/* Animación de pulso para el botón */
+.cta-button-secondary {
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  animation: none;
+}
+
+.cta-button-secondary:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(183, 28, 28, 0.7); }
   70% { box-shadow: 0 0 0 15px rgba(183, 28, 28, 0); }
