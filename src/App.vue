@@ -1,116 +1,139 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import HeroSection from './components/HelloWorld.vue'
+import { ref, computed } from "vue";
+import HeroSection from "./components/HelloWorld.vue";
 // Importar iconos para la sección de comunidad
-import { MessageSquare, Users, Paintbrush, ThumbsUp, GitBranch } from 'lucide-vue-next'
+import {
+  MessageSquare,
+  Users,
+  Paintbrush,
+  ThumbsUp,
+  GitBranch,
+} from "lucide-vue-next";
 
 // ----- Contexto de tu Juego -----
-const gameTitle = "FIVE NIGHTS IN THE CEJA"
-const gameDescription = "Un joven debe atravesar cinco zonas urbanas peligrosas de La Paz para llegar a casa, enfrentando amenazas físicas, psicológicas y sobrenaturales."
+const gameTitle = "FIVE NIGHTS IN THE CEJA";
+const gameDescription =
+  "Un joven debe atravesar cinco zonas urbanas peligrosas de La Paz para llegar a casa, enfrentando amenazas físicas, psicológicas y sobrenaturales.";
 
 // ----- Datos de Niveles (CON IMÁGENES) -----
 const levels = ref([
   {
     title: "Nivel 1: El Despertar",
     setting: "Baño de una discoteca en El Alto, 2:45 a.m.",
-    description: "Escapa de los 'cazadores de borrachos' en un silencio incómodo, encontrando tu celular para huir por la puerta trasera.",
+    description:
+      "Escapa de los 'cazadores de borrachos' en un silencio incómodo, encontrando tu celular para huir por la puerta trasera.",
     // Placeholder oscuro con texto. ¡Cámbialos por tus capturas!
-    imageUrl: "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Discoteca+Vac%C3%ADa"
+    imageUrl:
+      "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Discoteca+Vac%C3%ADa",
   },
   {
     title: "Nivel 2: La Bajada",
     setting: "Zona 12 de Octubre, El Alto.",
-    description: "Desciende por calles mal iluminadas, evitando asaltantes y perros callejeros, hasta el puesto de salchipapa.",
-    imageUrl: "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Callej%C3%B3n+Oscuro"
+    description:
+      "Desciende por calles mal iluminadas, evitando asaltantes y perros callejeros, hasta el puesto de salchipapa.",
+    imageUrl:
+      "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Callej%C3%B3n+Oscuro",
   },
   {
     title: "Nivel 3: El Cruce",
     setting: "Puente del Arquitecto.",
-    description: "Sobrevive a vendedores falsos, policías corruptos y ladrones para tomar el minibús y continuar tu huida.",
-    imageUrl: "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Puente+Nocturno"
-  }
-])
+    description:
+      "Sobrevive a vendedores falsos, policías corruptos y ladrones para tomar el minibús y continuar tu huida.",
+    imageUrl: "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Puente+Nocturno",
+  },
+]);
 
 // ----- Datos de la Comunidad (NUEVO) -----
-type PostType = 'Opinión' | 'Sugerencia' | 'Creación';
+type PostType = "Opinión" | "Sugerencia" | "Creación";
 
 const communityPosts = ref([
   {
     id: 1,
-    type: 'Opinión' as PostType,
+    type: "Opinión" as PostType,
     title: "¡Qué susto el Nivel 2! No me lo esperaba",
     author: "Gamer_Bolivia",
     avatarUrl: "https://placehold.co/40x40/b71c1c/ffffff?text=G",
-    content: "En serio, la parte donde suenan los perros y no sabes de dónde... 10/10. Me recordó a cuando volvía de una fiesta en la 12.",
+    content:
+      "En serio, la parte donde suenan los perros y no sabes de dónde... 10/10. Me recordó a cuando volvía de una fiesta en la 12.",
     upvotes: 42,
     comments: 8,
   },
   {
     id: 2,
-    type: 'Sugerencia' as PostType,
+    type: "Sugerencia" as PostType,
     title: "Sugerencia: Añadir un 'Modo Paceño'",
     author: "Llajta_Mike",
     avatarUrl: "https://placehold.co/40x40/1a1a1a/e0e0e0?text=L",
-    content: "¿Qué tal si en un modo difícil el personaje tiene que comer un sándwich de chola para recuperar vida pero solo hay uno en todo el mapa?",
+    content:
+      "¿Qué tal si en un modo difícil el personaje tiene que comer un sándwich de chola para recuperar vida pero solo hay uno en todo el mapa?",
     upvotes: 112,
     comments: 23,
   },
   {
     id: 3,
-    type: 'Creación' as PostType,
+    type: "Creación" as PostType,
     title: "[SKIN] Hice un mod del 'Pepino' como enemigo",
     author: "ArteDigital",
     avatarUrl: "https://placehold.co/40x40/1a1a1a/e0e0e0?text=A",
-    content: "Adjunto un diseño de cómo se vería el 'Pepino' persiguiéndote en el Nivel 3. ¡Espero que a los desarrolladores les guste! [Ver Imagen]",
+    content:
+      "Adjunto un diseño de cómo se vería el 'Pepino' persiguiéndote en el Nivel 3. ¡Espero que a los desarrolladores les guste! [Ver Imagen]",
     upvotes: 89,
     comments: 15,
   },
   {
     id: 4,
-    type: 'Sugerencia' as PostType,
+    type: "Sugerencia" as PostType,
     title: "Los 'cazadores de borrachos' deberían robarte el celular",
     author: "Ceja_Survivor",
     avatarUrl: "https://placehold.co/40x40/1a1a1a/e0e0e0?text=C",
-    content: "Si te atrapan, en lugar de 'Game Over', que te quiten el celular. Y tengas que buscar un punto de WiFi gratis para ver el mapa.",
+    content:
+      "Si te atrapan, en lugar de 'Game Over', que te quiten el celular. Y tengas que buscar un punto de WiFi gratis para ver el mapa.",
     upvotes: 74,
     comments: 11,
   },
-])
+]);
 
 // Sistema de Pestañas para la Comunidad
-const activeTab = ref<PostType>('Opinión');
+const activeTab = ref<PostType>("Opinión");
 const filteredPosts = computed(() => {
-  return communityPosts.value.filter(post => post.type === activeTab.value);
+  return communityPosts.value.filter((post) => post.type === activeTab.value);
 });
 
 // Iconos para tipos de post
 const postIcons = {
-  'Opinión': MessageSquare,
-  'Sugerencia': GitBranch,
-  'Creación': Paintbrush,
-}
-
+  Opinión: MessageSquare,
+  Sugerencia: GitBranch,
+  Creación: Paintbrush,
+};
 </script>
 
 <template>
   <main>
     <HeroSection :msg="gameTitle" :description="gameDescription" />
-    
+
     <div class="content-wrapper">
       <!-- ===== SECCIÓN DE NIVELES (ACTUALIZADA) ===== -->
       <section class="levels-section">
-        <h2 v-motion-slide-visible-once-bottom>
+        <h2
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+        >
           Sobrevive a la Noche
         </h2>
-        
+
         <div class="levels-list">
-          <div 
-            class="level-card" 
-            v-for="(level, index) in levels" 
+          <div
+            class="level-card"
+            v-for="(level, index) in levels"
             :key="level.title"
             v-motion
             :initial="{ opacity: 0, x: -100 }"
-            :visible-once="{ opacity: 1, x: 0, transition: { delay: index * 150 } }"
+            :enter="{
+              opacity: 1, 
+              x: 0,
+              transition: { delay: index * 150 },
+            }"
           >
             <!-- Imagen del Nivel -->
             <div class="level-image">
@@ -128,29 +151,51 @@ const postIcons = {
 
       <!-- ===== NUEVA SECCIÓN: COMUNIDAD ===== -->
       <section class="community-section">
-        <h2 v-motion-slide-visible-once-bottom>
+        <h2
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+        >
           Apoyo de la Comunidad
         </h2>
-        <p class="community-subtitle" v-motion-slide-visible-once-bottom>
-          Únete a la conversación, comparte tus creaciones y ayuda a mejorar el juego.
+        <p
+          class="community-subtitle"
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :enter="{
+            opacity: 1, 
+            y: 0,
+            transition: { duration: 500, delay: 150 },
+          }"
+        >
+          Únete a la conversación, comparte tus creaciones y ayuda a mejorar el
+          juego.
         </p>
-
         <!-- Pestañas de la Comunidad -->
-        <div class="community-tabs" v-motion-slide-visible-once-bottom>
-          <button 
-            @click="activeTab = 'Opinión'" 
+        <div
+          class="community-tabs"
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :enter="{
+            opacity: 1, 
+            y: 0,
+            transition: { duration: 500, delay: 300 },
+          }"
+        >
+          <button
+            @click="activeTab = 'Opinión'"
             :class="{ active: activeTab === 'Opinión' }"
           >
             <MessageSquare :size="18" /> Opiniones
           </button>
-          <button 
-            @click="activeTab = 'Sugerencia'" 
+          <button
+            @click="activeTab = 'Sugerencia'"
             :class="{ active: activeTab === 'Sugerencia' }"
           >
             <GitBranch :size="18" /> Sugerencias
           </button>
-          <button 
-            @click="activeTab = 'Creación'" 
+          <button
+            @click="activeTab = 'Creación'"
             :class="{ active: activeTab === 'Creación' }"
           >
             <Paintbrush :size="18" /> Creaciones
@@ -159,24 +204,32 @@ const postIcons = {
 
         <!-- Feed de la Comunidad -->
         <div class="community-feed">
-          <div 
+          <div
             class="community-post"
             v-for="post in filteredPosts"
             :key="post.id"
             v-motion
             :initial="{ opacity: 0, y: 50 }"
-            :visible-once="{ opacity: 1, y: 0, transition: { delay: post.id * 100 } }"
+            :enter="{
+              opacity: 1, 
+              y: 0,
+              transition: { delay: post.id * 100 },
+            }"
           >
             <!-- Encabezado del Post -->
             <div class="post-header">
-              <img :src="post.avatarUrl" :alt="post.author" class="post-avatar" />
+              <img
+                :src="post.avatarUrl"
+                :alt="post.author"
+                class="post-avatar"
+              />
               <span class="post-author">{{ post.author }}</span>
               <span class="post-type">
                 <component :is="postIcons[post.type]" :size="14" />
                 {{ post.type }}
               </span>
             </div>
-            
+
             <!-- Cuerpo del Post -->
             <div class="post-body">
               <h4>{{ post.title }}</h4>
@@ -186,7 +239,10 @@ const postIcons = {
             <!-- Pie del Post -->
             <div class="post-footer">
               <span><ThumbsUp :size="16" /> {{ post.upvotes }}</span>
-              <span><MessageSquare :size="16" /> {{ post.comments }} Comentarios</span>
+              <span
+                ><MessageSquare :size="16" />
+                {{ post.comments }} Comentarios</span
+              >
             </div>
           </div>
         </div>
@@ -220,7 +276,7 @@ main {
 }
 
 .levels-section h2 {
-  font-family: 'Creepster', cursive;
+  font-family: "Creepster", cursive;
   font-size: 3.5rem;
   color: var(--color-primary);
   text-transform: uppercase;
@@ -230,9 +286,18 @@ main {
 }
 
 @keyframes breathing-glow {
-  0% { text-shadow: 0 0 10px rgba(183, 28, 28, 0.5); opacity: 0.8; }
-  50% { text-shadow: 0 0 25px rgba(183, 28, 28, 1); opacity: 1; }
-  100% { text-shadow: 0 0 10px rgba(183, 28, 28, 0.5); opacity: 0.8; }
+  0% {
+    text-shadow: 0 0 10px rgba(183, 28, 28, 0.5);
+    opacity: 0.8;
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(183, 28, 28, 1);
+    opacity: 1;
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(183, 28, 28, 0.5);
+    opacity: 0.8;
+  }
 }
 
 .levels-list {
@@ -311,7 +376,7 @@ main {
 }
 
 .community-section h2 {
-  font-family: 'Creepster', cursive;
+  font-family: "Creepster", cursive;
   font-size: 3.5rem;
   color: var(--color-primary);
   text-transform: uppercase;
@@ -343,7 +408,7 @@ main {
   border-radius: 30px;
   font-size: 1rem;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-flex;
@@ -464,5 +529,4 @@ main {
     flex: 0 0 200px; /* Ancho completo, altura fija */
   }
 }
-
 </style>
