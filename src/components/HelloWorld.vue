@@ -80,7 +80,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   /* Reemplaza este placeholder por una imagen tuya */
-  background: #000 url('https://lapaz.metro-blog.com/wp-content/uploads/2016/11/la-paz-de-noche-centro.jpg') no-repeat center center/cover;
+  background: #000 url('https://images.pexels.com/photos/5199617/pexels-photo-5199617.jpeg') no-repeat center center/cover;
   filter: brightness(0.3) blur(2px);
   z-index: 1;
   animation: subtle-zoom 20s infinite alternate ease-in-out;
