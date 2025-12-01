@@ -64,7 +64,7 @@ onMounted(() => {
 <style scoped>
 .hero-section {
   position: relative;
-  min-height: 95vh; /* Cambiado de height a min-height */
+  height: 100vh; /* Cambiado a altura completa de la pantalla */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,6 +99,7 @@ onMounted(() => {
   position: relative;
   z-index: 2;
   padding: 2em;
+  margin-top: 6rem; /* Espacio para el navbar flotante */
 }
 
 .game-title {

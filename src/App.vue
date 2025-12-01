@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import HeroSection from "./components/HelloWorld.vue";
+import TeamSection from "./components/TeamSection.vue";
 // Importar iconos para la sección de comunidad
 import {
   MessageSquare,
@@ -65,6 +66,17 @@ const openMapModal = (level: Level) => {
 const closeMapModal = () => {
   showMapModal.value = false;
   selectedMap.value = null;
+};
+
+// Estado del modal del equipo
+const showTeamModal = ref(false);
+
+const openTeamModal = () => {
+  showTeamModal.value = true;
+};
+
+const closeTeamModal = () => {
+  showTeamModal.value = false;
 };
 
 // ----- Datos de Niveles (CON IMÁGENES) -----
@@ -178,6 +190,24 @@ const postIcons = {
 </script>
 
 <template>
+  <!-- ===== NAVBAR FLOTANTE ===== -->
+  <nav class="floating-navbar">
+    <div class="navbar-content">
+      <!-- Logo del Juego -->
+      <div class="navbar-logo">
+        <h2>FIVE NIGHTS<br><span>IN THE CEJA</span></h2>
+      </div>
+      
+      <!-- Navegación -->
+      <div class="navbar-nav">
+        <button class="nav-button" @click="openTeamModal">
+          <Users :size="20" />
+          <span>Conócenos</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
   <main>
     <HeroSection :msg="gameTitle" :description="gameDescription" />
 
@@ -430,6 +460,12 @@ const postIcons = {
       </div>
     </div>
 
+    <!-- ===== COMPONENTE DEL EQUIPO ===== -->
+    <TeamSection 
+      :isVisible="showTeamModal" 
+      @close="closeTeamModal"
+    />
+
     <footer class="main-footer">
       <p>Todos los derechos reservados © 2025. FIVE NIGHTS IN THE CEJA.</p>
     </footer>
@@ -437,9 +473,148 @@ const postIcons = {
 </template>
 
 <style scoped>
+/* --- Estilos del Navbar Flotante --- */
+
+.floating-navbar {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.navbar-content {
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.navbar-content:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 32px rgba(183, 28, 28, 0.2);
+}
+
+.navbar-logo h2 {
+  font-family: 'Creepster', cursive;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(183, 28, 28, 0.5);
+}
+
+.navbar-logo span {
+  font-size: 0.8rem;
+  color: var(--color-primary-hover);
+  display: block;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-button {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.nav-button:hover:before {
+  left: 100%;
+}
+
+.nav-button:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(183, 28, 28, 0.3);
+}
+
+/* Responsividad del Navbar */
+@media (max-width: 768px) {
+  .floating-navbar {
+    top: 1rem;
+    width: 95%;
+  }
+  
+  .navbar-content {
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .navbar-logo h2 {
+    font-size: 0.9rem;
+  }
+  
+  .navbar-logo span {
+    font-size: 0.7rem;
+  }
+  
+  .nav-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-content {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-logo h2 {
+    font-size: 0.8rem;
+  }
+  
+  .nav-button span {
+    display: none;
+  }
+  
+  .nav-button {
+    padding: 0.5rem;
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    justify-content: center;
+  }
+}
+
 main {
   display: flex;
   flex-direction: column;
+  padding-top: 0; /* Eliminamos el padding para que el hero ocupe toda la pantalla */
 }
 
 .content-wrapper {
