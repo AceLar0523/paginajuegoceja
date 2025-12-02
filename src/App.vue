@@ -16,7 +16,7 @@ import {
 // ----- Contexto de tu Juego -----
 const gameTitle = "FIVE NIGHTS IN THE CEJA";
 const gameDescription =
-  "Un joven debe atravesar cinco zonas urbanas peligrosas de La Paz para llegar a casa, enfrentando amenazas físicas, psicológicas y sobrenaturales.";
+  "Un joven debe atravesar tres zonas urbanas peligrosas de La Paz para llegar a casa, enfrentando amenazas físicas, psicológicas y sobrenaturales.";
 
 // ----- Datos de Personajes -----
 const characters = ref([
@@ -24,21 +24,21 @@ const characters = ref([
     id: 1,
     name: "El Protagonista",
     description: "Un joven paceño que debe sobrevivir a las calles nocturnas de La Paz.",
-    imageUrl: "https://placehold.co/300x400/b71c1c/ffffff?text=Protagonista",
+    imageUrl: "/img/personajeprincipal.jpg",
     fullDescription: "Un estudiante universitario de 22 años que vive en La Ceja. Después de una noche de fiesta en El Alto, debe encontrar el camino a casa atravesando las zonas más peligrosas de La Paz. Su única meta es llegar vivo, pero las calles nocturnas esconden más de lo que aparenta."
   },
   {
     id: 2,
     name: "El Cazador",
     description: "Enemigo misterioso que acecha en las sombras de los baños.",
-    imageUrl: "https://placehold.co/300x400/0a0a0a/e0e0e0?text=Cazador",
+    imageUrl: "/img/tirador.jpg",
     fullDescription: "Una figura siniestra que rondan los baños de las discotecas en busca de víctimas vulnerables. Su identidad es un misterio, pero su presencia es inconfundible. Se mueve en silencio y conoce cada rincón oscuro de la ciudad nocturna."
   },
   {
     id: 3,
-    name: "El Vigilante",
-    description: "Guardián corrupto que controla las calles del centro.",
-    imageUrl: "https://placehold.co/300x400/1a1a1a/e0e0e0?text=Vigilante",
+    name: "El Minibus",
+    description: "Minibus corrupto que controla las calles del centro.",
+    imageUrl: "/img/minibus.jpg",
     fullDescription: "Un ex-policía que ahora trabaja para organizaciones criminales locales. Conoce todos los atajos y rutas de escape, pero también controla quién puede pasar por su territorio. Su corrupción es legendaria en las calles de La Paz."
   }
 ]);
@@ -87,8 +87,8 @@ const levels = ref([
     description:
       "Escapa de los 'cazadores de borrachos' en un silencio incómodo, encontrando tu celular para huir por la puerta trasera.",
     imageUrl:
-      "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Discoteca+Vac%C3%ADa",
-    mapImage: "https://placehold.co/800x500/1a1a1a/b71c1c?text=Mapa+Discoteca",
+      "/img/map1.jpg",
+    mapImage: "/img/map1.jpg",
     detailedDescription: "Te despiertas desorientado en el baño de una discoteca en El Alto. El ambiente es claustrofóbico y amenazante. Los 'cazadores de borrachos' patrullan los pasillos, buscando víctimas fáciles. Debes moverte sigilosamente, evitar ser detectado y encontrar tu celular que perdiste durante la noche. La única salida segura es por la puerta trasera, pero el camino está lleno de peligros. Cada sombra puede esconder una amenaza, cada ruido puede delatar tu posición.",
     objectives: ["Encontrar tu celular perdido", "Evitar a los cazadores", "Escapar por la puerta trasera", "Mantener el sigilo absoluto"]
   },
@@ -98,8 +98,8 @@ const levels = ref([
     description:
       "Desciende por calles mal iluminadas, evitando asaltantes y perros callejeros, hasta el puesto de salchipapa.",
     imageUrl:
-      "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Callej%C3%B3n+Oscuro",
-    mapImage: "https://placehold.co/800x500/1a1a1a/b71c1c?text=Calles+12+Octubre",
+      "/img/map2.jpg",
+    mapImage: "/img/map2.jpg",
     detailedDescription: "Las calles de la Zona 12 de Octubre se extienden ante ti como un laberinto nocturno. La iluminación es escasa y las sombras ocultan peligros constantes. Asaltantes acechan en cada esquina, esperando el momento perfecto para atacar. Los perros callejeros, hambrientos y agresivos, patrullan en manadas. Tu objetivo es llegar al puesto de salchipapa, un refugio temporal donde podrás reagruparte, pero el camino es traicionero y cada paso mal dado puede ser el último.",
     objectives: ["Navegar por calles oscuras", "Evitar asaltantes", "Esquivar perros callejeros", "Llegar al puesto de salchipapa"]
   },
@@ -108,8 +108,8 @@ const levels = ref([
     setting: "Puente del Arquitecto.",
     description:
       "Sobrevive a vendedores falsos, policías corruptos y ladrones para tomar el minibús y continuar tu huida.",
-    imageUrl: "https://placehold.co/600x400/0a0a0a/e0e0e0?text=Puente+Nocturno",
-    mapImage: "https://placehold.co/800x500/1a1a1a/b71c1c?text=Puente+Arquitecto",
+    imageUrl: "/img/map3.jpg",
+    mapImage: "/img/map3.jpg",
     detailedDescription: "El Puente del Arquitecto es un punto de convergencia donde múltiples amenazas se entrecruzan. Vendedores falsos intentan distraerte con ofertas engañosas mientras sus cómplices preparan el asalto. Policías corruptos controlan el área, extorsionando a cualquiera que pase. Ladrones experimentados conocen cada escondite del puente. Tu misión es atravesar este gauntlet de corrupción y peligro para llegar a la parada de minibús, tu única oportunidad de escape hacia La Ceja.",
     objectives: ["Identificar vendedores falsos", "Evitar policías corruptos", "Escapar de ladrones", "Abordar el minibús a salvo"]
   },
